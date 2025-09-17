@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Provider Directory • Care Playbook</title>
+  <meta name="description" content="Find therapy clinics, medical specialists, equipment vendors, and more across South Alabama." />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Page-specific light styles (kept tiny to avoid editing styles.css) */
+    .filters {
+      display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 18px;
+    }
+    .filters select, .filters input[type="search"], .filters button {
+      padding:10px 12px; border:1px solid var(--line); border-radius:10px; font:inherit; background:#fff; color:var(--ink);
+    }
+    .filters button { cursor:pointer; }
+    .meta { display:flex; align-items:center; gap:10px; color:var(--muted); margin-bottom:8px; }
+    .tag { display:inline-block; background:#eef2ff; color:#334155; padding:4px 8px; border-radius:999px; font-size:12px; margin-right:6px; }
+    .provider-actions a { text-decoration:none; }
+    .provider-actions a:hover { text-decoration:underline; }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <h1>Provider Directory</h1>
+      <p class="lead">
+        Search and filter local providers by type and county. Each listing includes phone, website, and social links.
+      </p>
+    </div>
+  </header>
+
+  <!-- NAV (same structure as index2.html) -->
+  <nav class="shell" aria-label="Primary">
+    <div class="wrap">
+      <div class="nav-row">
+        <div class="brand">Care Playbook</div>
+
+        <!-- Desktop links -->
+        <div class="links" id="desktopLinks" aria-label="Desktop navigation">
+          <a href="/index.html#iep">IEP & 504</a>
+          <a href="/index.html#therapies">Therapies</a>
+          <a href="/index.html#medical">Medical & Equipment</a>
+          <a href="/index.html#funding">Funding & Benefits</a>
+          <a href="/index.html#advocacy">Advocacy & Rights</a>
+          <a href="/index.html#community">Self-Care & Community</a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown -->
+      <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+        <a role="menuitem" href="/index.html#iep">IEP & 504</a>
+        <a role="menuitem" href="/index.html#therapies">Therapies</a>
+        <a role="menuitem" href="/index.html#medical">Medical & Equipment</a>
+        <a role="menuitem" href="/index.html#funding">Funding & Benefits</a>
+        <a role="menuitem" href="/index.html#advocacy">Advocacy & Rights</a>
+        <a role="menuitem" href="/index.html#community">Self-Care & Community</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <!-- FILTERS -->
+    <section class="block" aria-labelledby="filterHeading">
+      <h2 id="filterHeading" class="h2">Find a Provider</h2>
+      <div class="filters" role="region" aria-label="Directory filters">
+        <select id="typeFilter" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <!-- Options populated by JS -->
+        </select>
+
+        <select id="countyFilter" aria-label="Filter by county">
+          <option value="">All Counties</option>
+          <!-- Options populated by JS -->
+        </select>
+
+        <input id="searchInput" type="search" placeholder="Search name or city…" aria-label="Search providers by name or city" />
+        <button id="clearBtn" type="button" aria-label="Clear filters">Clear</button>
+      </div>
+      <div class="meta">
+        <span id="resultCount" class="muted">Loading…</span>
+      </div>
+    </section>
+
+    <!-- PROVIDER GRID -->
+    <section class="block" aria-label="Provider results">
+      <div id="providerGrid" class="grid" aria-live="polite"></div>
+      <p id="noResults" class="muted" style="display:none; margin-top:8px;">No providers match your filters. Try clearing them.</p>
+    </section>
+
+    <!-- CONTRIBUTE / SUBMIT A RESOURCE -->
+    <section class="block center" id="contribute">
+      <h2 class="h2">Know a provider we should list?</h2>
+      <p class="lead narrow">
+        Share a therapist, clinic, vendor, or community org serving families in South Alabama. We’ll review and add it.
+      </p>
+      <p>
+        <a class="btn primary" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Provider%20Suggestion&body=Provider%20name%2C%20county%2C%20type%2C%20phone%2C%20website%2Fsocial%20links%2C%20and%20a%20note%20on%20what%20they%20offer.">Submit a Resource</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="y"></span> Care Playbook • Built for Baldwin, Mobile, and the Gulf Coast.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Mobile nav (same logic as index2.html) ---
+    const mq = window.matchMedia('(max-width: 900px)');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const desktopLinks = document.getElementById('desktopLinks');
+
+    function setNavMode() {
+      if (mq.matches) {
+        hamburger.style.display = 'inline-block';
+        desktopLinks.style.display = 'none';
+      } else {
+        hamburger.style.display = 'none';
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+        desktopLinks.style.display = 'flex';
+      }
+    }
+    setNavMode(); mq.addEventListener('change', setNavMode);
+    hamburger?.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      hamburger.setAttribute('aria-expanded', String(!open));
+    });
+    mobileMenu?.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // --- Provider data (SAMPLE) ---
+    // Replace these with real entries. Keep this flat JSON so it’s easy to edit.
+    const providers = [
+      {
+        name: "Example OT Clinic",
+        type: "OT",
+        county: "Baldwin",
+        city: "Daphne",
+        phone: "(251) 555-0101",
+        website: "https://example-ot.com",
+        socials: { facebook: "", instagram: "" }
+      },
+      {
+        name: "Example Speech & Language",
+        type: "SLP",
+        county: "Mobile",
+        city: "Mobile",
+        phone: "(251) 555-0199",
+        website: "https://example-slp.com",
+        socials: { facebook: "https://facebook.com/example-slp", instagram: "" }
+      },
+      {
+        name: "Gulf Coast PT",
+        type: "PT",
+        county: "Baldwin",
+        city: "Fairhope",
+        phone: "(251) 555-0123",
+        website: "",
+        socials: { facebook: "", instagram: "https://instagram.com/gulfcoastpt" }
+      },
+      {
+        name: "Feeding & Nutrition Clinic",
+        type: "Feeding Clinic",
+        county: "Mobile",
+        city: "Mobile",
+        phone: "(251) 555-0222",
+        website: "https://example-feeding.org",
+        socials: {}
+      },
+      {
+        name: "Adaptive Equipment Vendor",
+        type: "Equipment Vendor",
+        county: "Baldwin",
+        city: "Foley",
+        phone: "(251) 555-0303",
+        website: "https://example-equipment.com",
+        socials: { facebook: "", instagram: "" }
+      },
+      {
+        name: "Behavior Support (ABA-Alternative)",
+        type: "Behavioral / ABA-Alt",
+        county: "Escambia",
+        city: "Atmore",
+        phone: "(251) 555-0444",
+        website: "",
+        socials: {}
+      }
+    ];
+
+    // --- Populate filters (Type & County) ---
+    const typeFilter = document.getElementById('typeFilter');
+    const countyFilter = document.getElementById('countyFilter');
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearBtn');
+    const grid = document.getElementById('providerGrid');
+    const resultCount = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+
+    const unique = (arr) => [...new Set(arr)].sort((a,b)=>a.localeCompare(b));
+
+    function initFilters() {
+      const types = unique(providers.map(p => p.type).filter(Boolean));
+      const counties = unique(providers.map(p => p.county).filter(Boolean));
+
+      types.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t; opt.textContent = t; typeFilter.appendChild(opt);
+      });
+      counties.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c; countyFilter.appendChild(opt);
+      });
+    }
+
+    function telHref(phone) {
+      return 'tel:' + phone.replace(/[^\d+]/g, '');
+    }
+
+    function socialLinks(socials = {}) {
+      const links = [];
+      if (socials.facebook) links.push(`<a href="${socials.facebook}" target="_blank" rel="noopener">Facebook</a>`);
+      if (socials.instagram) links.push(`<a href="${socials.instagram}" target="_blank" rel="noopener">Instagram</a>`);
+      if (socials.x) links.push(`<a href="${socials.x}" target="_blank" rel="noopener">X</a>`);
+      if (socials.other) links.push(`<a href="${socials.other}" target="_blank" rel="noopener">Social</a>`);
+      return links.join(" · ");
+    }
+
+    function cardHTML(p) {
+      const site = p.website ? `<a href="${p.website}" target="_blank" rel="noopener">Website</a>` : '';
+      const socials = socialLinks(p.socials);
+      const contactBits = [site, socials].filter(Boolean).join(" · ");
+      return `
+        <article class="card">
+          <h3>${p.name}</h3>
+          <p class="muted" style="margin:0 0 8px;">
+            <span class="tag">${p.type}</span>
+            <span class="tag">${p.county}${p.city ? " • " + p.city : ""}</span>
+          </p>
+          <p style="margin:0 0 10px;">
+            <a href="${telHref(p.phone)}">${p.phone}</a>
+          </p>
+          <p class="provider-actions">${contactBits || '<span class="muted">No links provided</span>'}</p>
+        </article>
+      `;
+    }
+
+    function applyFilters() {
+      const t = typeFilter.value.trim().toLowerCase();
+      const c = countyFilter.value.trim().toLowerCase();
+      const q = searchInput.value.trim().toLowerCase();
+
+      const filtered = providers.filter(p => {
+        const matchType = !t || (p.type || '').toLowerCase() === t;
+        const matchCounty = !c || (p.county || '').toLowerCase() === c;
+        const hay = `${p.name} ${p.city || ''}`.toLowerCase();
+        const matchQuery = !q || hay.includes(q);
+        return matchType && matchCounty && matchQuery;
+      });
+
+      grid.innerHTML = filtered.map(cardHTML).join("");
+      resultCount.textContent = `${filtered.length} result${filtered.length === 1 ? '' : 's'}`;
+      noResults.style.display = filtered.length ? 'none' : 'block';
+    }
+
+    clearBtn.addEventListener('click', () => {
+      typeFilter.value = "";
+      countyFilter.value = "";
+      searchInput.value = "";
+      applyFilters();
+      searchInput.focus();
+    });
+
+    [typeFilter, countyFilter].forEach(el => el.addEventListener('change', applyFilters));
+    searchInput.addEventListener('input', applyFilters);
+
+    initFilters();
+    applyFilters();
+  </script>
+</body>
+</html>
