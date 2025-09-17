@@ -6,10 +6,6 @@
   <title>Care Playbook — South Alabama Special Needs Resources</title>
   <meta name="description" content="Care Playbook helps South Alabama parents and caregivers find local resources, templates, and how-tos for children with special needs." />
   <link rel="icon" href="/favicon.ico">
-  <meta property="og:title" content="Care Playbook — South Alabama Special Needs Resources">
-  <meta property="og:description" content="Local resources, templates, and how-tos for families on Alabama’s Gulf Coast.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://careplaybook.com/">
   <style>
     :root{
       --bg:#f8fafc; --ink:#0f172a; --muted:#475569; --accent:#0ea5e9; --accent-ink:#ffffff;
@@ -17,42 +13,83 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial; color:var(--ink); background:var(--bg)}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    body{
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
+      color:var(--ink); background:var(--bg);
+      overflow-x:hidden; /* prevent sideways scroll */
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
+
+    /* HERO */
     header.hero{
-      background: radial-gradient(1200px 500px at 50% -200px,#e6f6fe,transparent), linear-gradient(180deg,#ffffff,transparent 60%);
+      background: radial-gradient(1200px 500px at 50% -200px,#e6f6fe,transparent),
+                  linear-gradient(180deg,#ffffff,transparent 60%);
       border-bottom:1px solid var(--line);
     }
-    .hero-inner{padding:64px 0 36px}
-    h1{font-size: clamp(28px,5.2vw,48px); margin:0 0 8px}
-    .lead{font-size: clamp(16px,2.2vw,20px); color:var(--muted); margin:0 0 22px}
+    .hero-inner{padding:56px 0 30px}
+    h1{font-size: clamp(26px,6vw,44px); margin:0 0 10px}
+    .lead{font-size: clamp(15px,3.8vw,20px); color:var(--muted); margin:0 0 22px}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px}
     .btn{
       display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600; border:1px solid var(--line);
-      background:#fff; color:var(--ink);
+      background:#fff; color:var(--ink); white-space:nowrap;
     }
     .btn.primary{background:var(--accent); color:var(--accent-ink); border-color:transparent}
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
-    .chip{background:#eef2ff; color:#334155; padding:6px 10px; border-radius:999px; font-size:14px}
+    /* removed the chips entirely per request */
 
-    nav.top{position:sticky; top:0; z-index:5; background:#fff; border-bottom:1px solid var(--line)}
-    nav.top .bar{display:flex; gap:12px; padding:10px 0; overflow:auto}
-    nav.top a{color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:10px; white-space:nowrap}
-    nav.top a:hover{background:#f1f5f9}
+    /* NAV: desktop bar + mobile hamburger */
+    nav.shell{
+      position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--line);
+    }
+    .nav-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0}
+    .brand{font-weight:700}
+    .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .links a{
+      color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px;
+    }
+    .links a:hover{background:#f1f5f9}
 
-    main{padding:26px 0 48px}
-    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
-    .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px}
-    .card h3{margin:0 0 6px; font-size:18px}
-    .card p{margin:0 0 12px; color:var(--muted)}
-    .links{display:flex; flex-direction:column; gap:6px}
-    .links a{color:var(--accent); text-decoration:none}
-    .links a:hover{text-decoration:underline}
+    /* Mobile hamburger */
+    .hamburger{
+      display:none; border:1px solid var(--line); padding:8px 10px; border-radius:10px; background:#fff; cursor:pointer;
+    }
+    .hamburger span{display:block; width:22px; height:2px; background:#334155; margin:4px 0}
 
-    section.block{margin:34px 0}
+    .mobile-menu{
+      display:none; /* toggled by JS */
+      border-top:1px solid var(--line);
+      padding:8px 0 12px;
+    }
+    .mobile-menu a{display:block; padding:10px 8px; color:var(--muted); text-decoration:none}
+    .mobile-menu a:hover{background:#f1f5f9}
+
+    /* CONTENT */
+    main{padding:24px 0 48px}
+    section.block{margin:30px 0}
     .center{text-align:center}
 
+    /* Responsive cards grid without overflow */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px;
+    }
+    @media (max-width:520px){
+      .grid{grid-template-columns:1fr;} /* force full-width on small phones */
+    }
+    .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px}
+    .card h3{margin:0 0 6px; font-size:18px}
+    .card p{margin:0 0 12px; color:var(--muted)}
+    .links-col{display:flex; flex-direction:column; gap:6px}
+    .links-col a{color:var(--accent); text-decoration:none; word-break:break-word}
+    .links-col a:hover{text-decoration:underline}
+
     footer{border-top:1px solid var(--line); color:var(--muted); padding:28px 0}
+    /* Keep long words/URLs from forcing horizontal scroll */
+    a, p, h1, h2, h3 { overflow-wrap: anywhere; }
   </style>
 </head>
 <body>
@@ -65,33 +102,49 @@
         <a class="btn primary" href="#resources">Explore Resources</a>
         <a class="btn" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Suggest a Resource</a>
       </div>
-      <div class="chips" aria-label="Focus areas">
-        <span class="chip">Baldwin &amp; Mobile Counties</span>
-        <span class="chip">IEP &amp; 504</span>
-        <span class="chip">Therapies</span>
-        <span class="chip">Funding &amp; Benefits</span>
-        <span class="chip">Advocacy</span>
-      </div>
     </div>
   </header>
 
-  <!-- STICKY NAV LINKS (within the page for now) -->
-  <nav class="top" aria-label="Section navigation">
-    <div class="wrap bar">
-      <a href="#iep">IEP & 504</a>
-      <a href="#therapies">Therapies</a>
-      <a href="#medical">Medical & Equipment</a>
-      <a href="#funding">Funding & Benefits</a>
-      <a href="#advocacy">Advocacy & Rights</a>
-      <a href="#community">Self-Care & Community</a>
-      <a href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Submit a Resource</a>
+  <!-- NAV -->
+  <nav class="shell" aria-label="Primary">
+    <div class="wrap">
+      <div class="nav-row">
+        <div class="brand">Care Playbook</div>
+
+        <!-- Desktop links -->
+        <div class="links" id="desktopLinks" aria-label="Desktop navigation">
+          <a href="#iep">IEP & 504</a>
+          <a href="#therapies">Therapies</a>
+          <a href="#medical">Medical & Equipment</a>
+          <a href="#funding">Funding & Benefits</a>
+          <a href="#advocacy">Advocacy & Rights</a>
+          <a href="#community">Self-Care & Community</a>
+          <a href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Submit a Resource</a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown -->
+      <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+        <a role="menuitem" href="#iep">IEP & 504</a>
+        <a role="menuitem" href="#therapies">Therapies</a>
+        <a role="menuitem" href="#medical">Medical & Equipment</a>
+        <a role="menuitem" href="#funding">Funding & Benefits</a>
+        <a role="menuitem" href="#advocacy">Advocacy & Rights</a>
+        <a role="menuitem" href="#community">Self-Care & Community</a>
+        <a role="menuitem" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Submit a Resource</a>
+      </div>
     </div>
   </nav>
 
   <main class="wrap">
-    <!-- WHY SECTION -->
+    <!-- WHY -->
     <section class="block center" id="why">
-      <h2 style="margin:0 0 8px; font-size:clamp(22px,3.6vw,28px)">Why Care Playbook?</h2>
+      <h2 style="margin:0 0 8px; font-size:clamp(20px,4.5vw,28px)">Why Care Playbook?</h2>
       <p class="lead" style="max-width:800px; margin:0 auto">
         Families on Alabama’s Gulf Coast often spend hours hunting for therapies, grants, or IEP support that’s easier to find upstate.
         We built Care Playbook to change that — a free, community-driven hub of guides, templates, and vetted local contacts.
@@ -104,7 +157,7 @@
         <article class="card" id="iep">
           <h3>IEP &amp; 504</h3>
           <p>Know your rights, prep for meetings, and use ready-to-send letters.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">IEP Meeting Checklist</a>
             <a href="#">Evaluation Request Letter</a>
             <a href="#">Goal Bank (examples)</a>
@@ -114,7 +167,7 @@
         <article class="card" id="therapies">
           <h3>Therapies</h3>
           <p>OT, PT, SLP, ABA alternatives, plus local providers and at-home programs.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">Provider Directory (South AL)</a>
             <a href="#">Home Exercise Log</a>
             <a href="#">Feeding Clinic Info</a>
@@ -124,7 +177,7 @@
         <article class="card" id="medical">
           <h3>Medical &amp; Equipment</h3>
           <p>Clinics, specialists, equipment vendors, and shareable care binders.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">Equipment Binder Index</a>
             <a href="#">Repair &amp; Vendor Log</a>
             <a href="#">Care One-Pager</a>
@@ -134,7 +187,7 @@
         <article class="card" id="funding">
           <h3>Funding &amp; Benefits</h3>
           <p>SSI, Medicaid waivers, tax credits, and local grants that actually help.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">Alabama Waiver Cheat Sheet</a>
             <a href="#">SSI Application Checklist</a>
             <a href="#">Local Grants &amp; Nonprofits</a>
@@ -144,7 +197,7 @@
         <article class="card" id="advocacy">
           <h3>Advocacy &amp; Rights</h3>
           <p>How to escalate, sample emails, and key state &amp; federal protections.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">Escalation Path (School → State)</a>
             <a href="#">Sample Email Scripts</a>
             <a href="#">Know Your Rights (Overview)</a>
@@ -154,7 +207,7 @@
         <article class="card" id="community">
           <h3>Self-Care &amp; Community</h3>
           <p>Support groups, respite options, sensory-friendly events, and wellness.</p>
-          <div class="links">
+          <div class="links-col">
             <a href="#">Parent Groups (Baldwin/Mobile)</a>
             <a href="#">Respite &amp; Night-Out Programs</a>
             <a href="#">Sensory-Friendly Events</a>
@@ -165,7 +218,7 @@
 
     <!-- CONTRIBUTE -->
     <section class="block center" id="contribute">
-      <h2 style="margin:0 0 10px; font-size:clamp(22px,3.6vw,28px)">Got a resource or tip?</h2>
+      <h2 style="margin:0 0 10px; font-size:clamp(20px,4.5vw,28px)">Got a resource or tip?</h2>
       <p class="lead" style="max-width:760px; margin:0 auto 14px">
         Whether it’s a great therapist in Daphne, a grant program, or an inclusive playground, help us share it with other families.
       </p>
@@ -181,6 +234,42 @@
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script>
+    // Mobile menu only under 900px
+    const mq = window.matchMedia('(max-width: 900px)');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const desktopLinks = document.getElementById('desktopLinks');
+
+    function setNavMode() {
+      if (mq.matches) {
+        hamburger.style.display = 'inline-block';
+        desktopLinks.style.display = 'none';
+      } else {
+        hamburger.style.display = 'none';
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+        desktopLinks.style.display = 'flex';
+      }
+    }
+    setNavMode(); mq.addEventListener('change', setNavMode);
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      hamburger.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
