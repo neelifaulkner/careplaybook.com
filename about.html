@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About • Care Playbook</title>
+  <meta name="description" content="About Care Playbook — a South Alabama resource hub for parents & caregivers of children with special needs." />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <h1>About Care Playbook</h1>
+      <p class="lead">
+        A community-driven guide built for parents and caregivers of children with special needs in South Alabama.
+      </p>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="shell" aria-label="Primary">
+    <div class="wrap">
+      <div class="nav-row">
+        <div class="brand">Care Playbook</div>
+
+        <!-- Desktop links -->
+        <div class="links" id="desktopLinks" aria-label="Desktop navigation">
+          <a href="/index.html#iep">IEP & 504</a>
+          <a href="/index.html#therapies">Therapies</a>
+          <a href="/index.html#medical">Medical & Equipment</a>
+          <a href="/index.html#funding">Funding & Benefits</a>
+          <a href="/index.html#advocacy">Advocacy & Rights</a>
+          <a href="/index.html#community">Self-Care & Community</a>
+          <a href="/about.html" aria-current="page">About</a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown -->
+      <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+        <a role="menuitem" href="/index.html#iep">IEP & 504</a>
+        <a role="menuitem" href="/index.html#therapies">Therapies</a>
+        <a role="menuitem" href="/index.html#medical">Medical & Equipment</a>
+        <a role="menuitem" href="/index.html#funding">Funding & Benefits</a>
+        <a role="menuitem" href="/index.html#advocacy">Advocacy & Rights</a>
+        <a role="menuitem" href="/index.html#community">Self-Care & Community</a>
+        <a role="menuitem" href="/about.html" aria-current="page">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="block">
+      <h2 class="h2">Our Mission</h2>
+      <p class="lead narrow">
+        To make it faster and less stressful for South Alabama families to find **real, local** help—so you can spend more time caring for your child and less time digging through outdated links.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">Who It’s For</h2>
+      <ul>
+        <li>Parents and caregivers of children with disabilities and medical complexities</li>
+        <li>Families navigating IEPs/504s in Baldwin, Mobile, and nearby counties</li>
+        <li>Anyone looking for therapists, clinics, equipment vendors, grants, and respite options close to the Gulf Coast</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">What You’ll Find</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>IEP & 504</h3>
+          <p>Alabama timelines, meeting prep, and ready-to-use letters.</p>
+        </article>
+        <article class="card">
+          <h3>Therapies</h3>
+          <p>OT, PT, SLP, feeding resources, and vetted local providers.</p>
+        </article>
+        <article class="card">
+          <h3>Medical & Equipment</h3>
+          <p>Clinics, specialists, equipment vendors, and binder templates.</p>
+        </article>
+        <article class="card">
+          <h3>Funding & Benefits</h3>
+          <p>SSI, Medicaid waivers, local grants, and tax credit guidance.</p>
+        </article>
+        <article class="card">
+          <h3>Advocacy & Rights</h3>
+          <p>Escalation paths, sample emails, state & federal protections.</p>
+        </article>
+        <article class="card">
+          <h3>Self-Care & Community</h3>
+          <p>Support groups, respite nights, sensory-friendly events.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">Our Focus: South Alabama</h2>
+      <p>
+        Central and North Alabama have strong networks—great. But families on the coast often face longer drives, fewer providers, and limited awareness of what’s nearby.
+        Care Playbook highlights resources that are **actually accessible** to Baldwin, Mobile, and surrounding counties.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">How You Can Help</h2>
+      <p>
+        Know a therapist with short waitlists? A church hosting respite nights? An inclusive playground we should list?
+        Send it our way and we’ll add it for other families to find.
+      </p>
+      <p>
+        <a class="btn primary" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion&body=Share%20a%20link%2C%20contact%20info%2C%20and%20why%20it%20helped%20your%20family.">Suggest a Resource</a>
+      </p>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">Disclaimer</h2>
+      <p>
+        Care Playbook provides general information and community-sourced listings. It is not legal, medical, or financial advice.
+        Always confirm details directly with providers and consult licensed professionals for guidance specific to your child.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="y"></span> Care Playbook • Built for Baldwin, Mobile, and the Gulf Coast.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mq = window.matchMedia('(max-width: 900px)');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const desktopLinks = document.getElementById('desktopLinks');
+
+    function setNavMode() {
+      if (mq.matches) {
+        hamburger.style.display = 'inline-block';
+        desktopLinks.style.display = 'none';
+      } else {
+        hamburger.style.display = 'none';
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+        desktopLinks.style.display = 'flex';
+      }
+    }
+    setNavMode();
+    mq.addEventListener('change', setNavMode);
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      hamburger.setAttribute('aria-expanded', String(!open));
+    });
+
+    mobileMenu.addEventListener('click', e => {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
