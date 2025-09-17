@@ -73,7 +73,7 @@
   <main class="wrap">
     <!-- FILTERS -->
     <section class="block" aria-labelledby="filterHeading">
-      <h2 id="filterHeading" class="h2">Find a Vendor</h2>
+      <h2 id="filterHeading" class="h2">Find a Provider</h2>
       <div class="filters" role="region" aria-label="Directory filters">
         <select id="typeFilter" aria-label="Filter by type">
           <option value="">All Types</option>
@@ -85,7 +85,7 @@
           <!-- Options populated by JS -->
         </select>
 
-        <input id="searchInput" type="search" placeholder="Search name or city…" aria-label="Search providers by name or city" />
+        <input id="searchInput" type="search" placeholder="Search name or city…" aria-label="Search vendors by name or city" />
         <button id="clearBtn" type="button" aria-label="Clear filters">Clear</button>
       </div>
       <div class="meta">
@@ -93,10 +93,10 @@
       </div>
     </section>
 
-    <!-- VENDOR GRID -->
+    <!-- PROVIDER GRID -->
     <section class="block" aria-label="Vendor results">
       <div id="vendorGrid" class="grid" aria-live="polite"></div>
-      <p id="noResults" class="muted" style="display:none; margin-top:8px;">No providers match your filters. Try clearing them.</p>
+      <p id="noResults" class="muted" style="display:none; margin-top:8px;">No vendors match your filters. Try clearing them.</p>
     </section>
 
     <!-- CONTRIBUTE / SUBMIT A RESOURCE -->
@@ -155,7 +155,7 @@
     const providers = [
       {
         name: "Example OT Clinic",
-        type: "OT",
+        type: "Wheelchairs",
         county: "Baldwin",
         city: "Daphne",
         phone: "(251) 555-0101",
@@ -164,7 +164,7 @@
       },
       {
         name: "Example Speech & Language",
-        type: "SLP",
+        type: "Breathing Equipment",
         county: "Mobile",
         city: "Mobile",
         phone: "(251) 555-0199",
@@ -173,7 +173,7 @@
       },
       {
         name: "Gulf Coast PT",
-        type: "PT",
+        type: "Motorized Equipment",
         county: "Baldwin",
         city: "Fairhope",
         phone: "(251) 555-0123",
@@ -182,7 +182,7 @@
       },
       {
         name: "Feeding & Nutrition Clinic",
-        type: "Feeding Clinic",
+        type: "Feeding Equipment",
         county: "Mobile",
         city: "Mobile",
         phone: "(251) 555-0222",
@@ -191,7 +191,7 @@
       },
       {
         name: "Adaptive OT",
-        type: "OT",
+        type: "Orthotics",
         county: "Baldwin",
         city: "Foley",
         phone: "(251) 555-0303",
@@ -200,7 +200,7 @@
       },
       {
         name: "Behavior Support (ABA-Alternative)",
-        type: "Behavioral / ABA-Alt",
+        type: "Wheelchairs",
         county: "Escambia",
         city: "Atmore",
         phone: "(251) 555-0444",
