@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Care Playbook – Coming Soon</title>
+  <meta name="description" content="Care Playbook is a curated hub of resources, contacts, templates, and how-tos for parents & caregivers of special-needs children.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f9fafb; --card:#fff; --ink:#1e293b; --muted:#64748b;
+      --accent:#0ea5e9; --radius:14px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+    .box{
+      background:var(--card);
+      padding:48px 40px;
+      border-radius:var(--radius);
+      box-shadow:0 4px 18px rgba(0,0,0,.05);
+      max-width:520px;
+      width:100%;
+      text-align:center;
+    }
+    h1{font-size:clamp(28px,5vw,40px);margin-bottom:12px;}
+    p{color:var(--muted);margin-bottom:28px;font-size:18px;}
+    form{display:flex;flex-direction:column;gap:14px;}
+    input,textarea{
+      padding:12px 14px;
+      border:1px solid #e2e8f0;
+      border-radius:8px;
+      font-size:16px;
+      font-family:inherit;
+      width:100%;
+    }
+    button{
+      background:var(--accent);
+      color:#fff;
+      font-size:17px;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+    button:hover{filter:brightness(.95);}
+    footer{margin-top:28px;color:var(--muted);font-size:14px;}
+    @media(max-width:500px){
+      .box{padding:32px 24px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Care Playbook</h1>
+    <p>Our collection of resources for parents & caregivers of special-needs children is on its way.  
+    Want to help shape it? Share a resource with us!</p>
+
+    <form action="mailto:neeli.faulkner@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" rows="4" placeholder="Tell us about a resource…" required></textarea>
+      <button type="submit">Send Resource</button>
+    </form>
+
+    <footer>© <span id="year"></span> Care Playbook • All rights reserved</footer>
+  </div>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
