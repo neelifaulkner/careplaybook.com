@@ -6,102 +6,16 @@
   <title>Care Playbook — South Alabama Special Needs Resources</title>
   <meta name="description" content="Care Playbook helps South Alabama parents and caregivers find local resources, templates, and how-tos for children with special needs." />
   <link rel="icon" href="/favicon.ico">
-  <style>
-    :root{
-      --bg:#f8fafc; --ink:#0f172a; --muted:#475569; --accent:#0ea5e9; --accent-ink:#ffffff;
-      --card:#ffffff; --line:#e2e8f0; --radius:16px; --max:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-      color:var(--ink); background:var(--bg);
-      overflow-x:hidden; /* prevent sideways scroll */
-    }
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
-
-    /* HERO */
-    header.hero{
-      background: radial-gradient(1200px 500px at 50% -200px,#e6f6fe,transparent),
-                  linear-gradient(180deg,#ffffff,transparent 60%);
-      border-bottom:1px solid var(--line);
-    }
-    .hero-inner{padding:56px 0 30px}
-    h1{font-size: clamp(26px,6vw,44px); margin:0 0 10px}
-    .lead{font-size: clamp(15px,3.8vw,20px); color:var(--muted); margin:0 0 22px}
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px}
-    .btn{
-      display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600; border:1px solid var(--line);
-      background:#fff; color:var(--ink); white-space:nowrap;
-    }
-    .btn.primary{background:var(--accent); color:var(--accent-ink); border-color:transparent}
-    /* removed the chips entirely per request */
-
-    /* NAV: desktop bar + mobile hamburger */
-    nav.shell{
-      position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--line);
-    }
-    .nav-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0}
-    .brand{font-weight:700}
-    .links{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .links a{
-      color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px;
-    }
-    .links a:hover{background:#f1f5f9}
-
-    /* Mobile hamburger */
-    .hamburger{
-      display:none; border:1px solid var(--line); padding:8px 10px; border-radius:10px; background:#fff; cursor:pointer;
-    }
-    .hamburger span{display:block; width:22px; height:2px; background:#334155; margin:4px 0}
-
-    .mobile-menu{
-      display:none; /* toggled by JS */
-      border-top:1px solid var(--line);
-      padding:8px 0 12px;
-    }
-    .mobile-menu a{display:block; padding:10px 8px; color:var(--muted); text-decoration:none}
-    .mobile-menu a:hover{background:#f1f5f9}
-
-    /* CONTENT */
-    main{padding:24px 0 48px}
-    section.block{margin:30px 0}
-    .center{text-align:center}
-
-    /* Responsive cards grid without overflow */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:14px;
-    }
-    @media (max-width:520px){
-      .grid{grid-template-columns:1fr;} /* force full-width on small phones */
-    }
-    .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px}
-    .card h3{margin:0 0 6px; font-size:18px}
-    .card p{margin:0 0 12px; color:var(--muted)}
-    .links-col{display:flex; flex-direction:column; gap:6px}
-    .links-col a{color:var(--accent); text-decoration:none; word-break:break-word}
-    .links-col a:hover{text-decoration:underline}
-
-    footer{border-top:1px solid var(--line); color:var(--muted); padding:28px 0}
-    /* Keep long words/URLs from forcing horizontal scroll */
-    a, p, h1, h2, h3 { overflow-wrap: anywhere; }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <!-- HERO -->
   <header class="hero">
     <div class="wrap hero-inner">
       <h1>Care Playbook</h1>
-      <p class="lead">Your guide to resources, support, and peace of mind for families of children with special needs in South Alabama.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="#resources">Explore Resources</a>
-        <a class="btn" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Suggest a Resource</a>
-      </div>
+      <p class="lead">
+        Your guide to resources, support, and peace of mind for families of children with special needs in South Alabama.
+      </p>
     </div>
   </header>
 
@@ -119,7 +33,6 @@
           <a href="#funding">Funding & Benefits</a>
           <a href="#advocacy">Advocacy & Rights</a>
           <a href="#community">Self-Care & Community</a>
-          <a href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Submit a Resource</a>
         </div>
 
         <!-- Mobile hamburger -->
@@ -136,7 +49,6 @@
         <a role="menuitem" href="#funding">Funding & Benefits</a>
         <a role="menuitem" href="#advocacy">Advocacy & Rights</a>
         <a role="menuitem" href="#community">Self-Care & Community</a>
-        <a role="menuitem" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion">Submit a Resource</a>
       </div>
     </div>
   </nav>
@@ -144,8 +56,8 @@
   <main class="wrap">
     <!-- WHY -->
     <section class="block center" id="why">
-      <h2 style="margin:0 0 8px; font-size:clamp(20px,4.5vw,28px)">Why Care Playbook?</h2>
-      <p class="lead" style="max-width:800px; margin:0 auto">
+      <h2 class="h2">Why Care Playbook?</h2>
+      <p class="lead narrow">
         Families on Alabama’s Gulf Coast often spend hours hunting for therapies, grants, or IEP support that’s easier to find upstate.
         We built Care Playbook to change that — a free, community-driven hub of guides, templates, and vetted local contacts.
       </p>
@@ -215,17 +127,6 @@
         </article>
       </div>
     </section>
-
-    <!-- CONTRIBUTE -->
-    <section class="block center" id="contribute">
-      <h2 style="margin:0 0 10px; font-size:clamp(20px,4.5vw,28px)">Got a resource or tip?</h2>
-      <p class="lead" style="max-width:760px; margin:0 auto 14px">
-        Whether it’s a great therapist in Daphne, a grant program, or an inclusive playground, help us share it with other families.
-      </p>
-      <p>
-        <a class="btn primary" href="mailto:neeli.faulkner@gmail.com?subject=Care%20Playbook%20Resource%20Suggestion&body=Share%20a%20link%2C%20contact%20info%2C%20and%20why%20it%20helped%20your%20family.">Submit a Resource</a>
-      </p>
-    </section>
   </main>
 
   <footer>
@@ -235,7 +136,7 @@
   </footer>
 
   <script>
-    // Mobile menu only under 900px
+    // Mobile menu toggle
     const mq = window.matchMedia('(max-width: 900px)');
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -252,7 +153,8 @@
         desktopLinks.style.display = 'flex';
       }
     }
-    setNavMode(); mq.addEventListener('change', setNavMode);
+    setNavMode();
+    mq.addEventListener('change', setNavMode);
 
     hamburger.addEventListener('click', () => {
       const open = mobileMenu.style.display === 'block';
@@ -260,15 +162,13 @@
       hamburger.setAttribute('aria-expanded', String(!open));
     });
 
-    // Close mobile menu when clicking a link
-    mobileMenu.addEventListener('click', (e) => {
+    mobileMenu.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         mobileMenu.style.display = 'none';
         hamburger.setAttribute('aria-expanded', 'false');
       }
     });
 
-    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
